@@ -19,11 +19,15 @@
     --card-bg:    #FFFFFF;
     --border:     rgba(200,150,12,0.25);
     --shadow:     0 2px 16px rgba(200,120,10,0.10);
+    --orange:     #E07B1A;
+    --brown:      #8B4513;
+    --green:      #2E7D32;
+    --purple:     #7B1FA2;
+    --teal:       #00695C;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--cream); color: var(--dark); font-family: 'Lato', sans-serif; min-height: 100vh; }
 
-  /* HEADER */
   header {
     background: linear-gradient(135deg, #1A0D00 0%, #3D1C00 60%, #6B3500 100%);
     padding: 28px 24px 22px; text-align: center; position: relative; overflow: hidden;
@@ -39,27 +43,26 @@
   .live-dot { width: 7px; height: 7px; background: #66BB6A; border-radius: 50%; animation: pulse 1.5s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-  /* CONFIG BAR */
   .config-bar { background: var(--warm-white); border-bottom: 1px solid var(--border); padding: 14px 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
   .config-bar label { font-size: 0.82rem; color: var(--muted); font-weight: 700; letter-spacing: 0.5px; white-space: nowrap; }
-  .config-bar input { flex: 1; min-width: 240px; border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 0.85rem; color: var(--dark); background: #fff; outline: none; transition: border 0.2s; }
-  .config-bar input:focus { border-color: var(--saffron); }
   .btn { background: var(--saffron); color: #fff; border: none; border-radius: 8px; padding: 9px 20px; font-size: 0.85rem; font-weight: 700; cursor: pointer; letter-spacing: 0.4px; transition: background 0.2s, transform 0.1s; white-space: nowrap; }
   .btn:hover { background: #C06815; }
   .btn:active { transform: scale(0.97); }
-  .btn-sm { padding: 6px 14px; font-size: 0.78rem; }
-  .btn-outline { background: transparent; border: 1.5px solid var(--saffron); color: var(--saffron); }
-  .btn-outline:hover { background: rgba(224,123,26,0.08); }
   .last-sync { font-size: 0.78rem; color: var(--muted); margin-left: auto; white-space: nowrap; }
 
-  /* STATUS */
   #statusBar { display: none; margin: 12px 20px 0; padding: 10px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; }
   #statusBar.loading { background: #FFF8E1; border: 1px solid #FFD54F; color: #795548; display: block; }
   #statusBar.error   { background: #FFEBEE; border: 1px solid #EF9A9A; color: #C62828; display: block; }
   #statusBar.success { background: #E8F5E9; border: 1px solid #A5D6A7; color: var(--success); display: block; }
 
-  /* MAIN */
   main { padding: 20px; max-width: 1200px; margin: 0 auto; }
+
+  /* PAGE TABS */
+  .page-tabs { display: flex; gap: 0; margin-bottom: 20px; background: var(--card-bg); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+  .page-tab { flex: 1; text-align: center; padding: 12px 16px; font-weight: 700; font-size: 0.88rem; cursor: pointer; transition: all 0.15s; color: var(--muted); background: transparent; border: none; letter-spacing: 0.5px; }
+  .page-tab:hover { background: #FFF8E8; }
+  .page-tab.active { background: var(--saffron); color: #fff; }
+  .page-tab:not(:last-child) { border-right: 1px solid var(--border); }
 
   /* STAT CARDS */
   .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 12px; margin-bottom: 24px; }
@@ -69,34 +72,23 @@
   .stat-value { font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 700; color: var(--saffron); line-height: 1; }
   .stat-label { font-size: 0.73rem; color: var(--muted); margin-top: 4px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
 
-  /* SECTION TITLE */
   .section-title { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 600; color: var(--deep-gold); letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
   .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  /* BAR CHART */
   .bar-chart { background: var(--card-bg); border-radius: 14px; padding: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 24px; }
   .bar-chart-scroll { display: flex; align-items: flex-end; gap: 6px; height: 150px; padding-bottom: 36px; position: relative; overflow-x: auto; }
   .bar-chart-scroll::after { content: ''; position: absolute; bottom: 36px; left: 0; right: 0; height: 1px; background: var(--border); }
   .bar-group { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 54px; }
-  .bar { width: 38px; border-radius: 5px 5px 0 0; background: linear-gradient(180deg, var(--saffron), var(--gold)); position: relative; cursor: pointer; transition: opacity 0.15s; }
-  .bar:hover { opacity: 0.8; }
-  .bar-val { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 0.68rem; font-weight: 700; color: var(--saffron); white-space: nowrap; }
-  .bar-label { font-size: 0.65rem; color: var(--muted); margin-top: 6px; text-align: center; font-weight: 600; line-height: 1.3; }
-
-  /* STACKED MINI CHART */
   .stacked-bar { width: 38px; display: flex; flex-direction: column-reverse; border-radius: 5px 5px 0 0; overflow: hidden; }
   .stacked-seg { width: 100%; transition: height 0.6s; }
+  .bar-label { font-size: 0.65rem; color: var(--muted); margin-top: 6px; text-align: center; font-weight: 600; line-height: 1.3; }
 
-  /* PROGRESS BARS */
   .progress-card { background: var(--card-bg); border-radius: 12px; padding: 14px 18px; box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 10px; }
   .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 4px; }
   .progress-name { font-weight: 700; font-size: 0.92rem; color: var(--dark); }
-  .progress-meta { display: flex; gap: 10px; font-size: 0.75rem; color: var(--muted); }
-  .progress-meta span { display: flex; align-items: center; gap: 3px; }
   .progress-bar-wrap { background: #F3E5C0; border-radius: 99px; height: 9px; overflow: hidden; }
   .progress-bar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--gold), var(--saffron)); transition: width 0.8s cubic-bezier(.4,0,.2,1); }
 
-  /* COLLAPSIBLE */
   .collapsible-section { margin-bottom: 12px; }
   .collapsible-header { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 13px 18px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow); transition: background 0.15s; user-select: none; }
   .collapsible-header:hover { background: #FFF8E8; }
@@ -108,7 +100,6 @@
   .collapsible-body { display: none; background: var(--card-bg); border: 1px solid var(--border); border-top: none; border-radius: 0 0 12px 12px; overflow: hidden; }
   .collapsible-body.open { display: block; }
 
-  /* TABLE */
   .data-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
   .data-table th { background: #FFF3E0; color: var(--mid); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 9px 14px; font-size: 0.7rem; text-align: left; border-bottom: 2px solid var(--border); }
   .data-table td { padding: 9px 14px; border-bottom: 1px solid rgba(200,150,12,0.09); color: var(--dark); }
@@ -116,10 +107,8 @@
   .data-table tr:nth-child(even) td { background: rgba(200,150,12,0.03); }
   .pill { display: inline-block; font-weight: 700; padding: 2px 9px; border-radius: 99px; font-size: 0.78rem; }
   .pill-saffron { background: linear-gradient(135deg, var(--gold), var(--saffron)); color: #fff; }
-  .pill-green { background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; }
   .pill-zero { background: #F5F5F5; color: #9E9E9E; }
 
-  /* PODIUM */
   .podium { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
   .podium-card { flex: 1; min-width: 110px; background: var(--card-bg); border-radius: 12px; padding: 14px 10px; text-align: center; box-shadow: var(--shadow); border: 1px solid var(--border); }
   .podium-card.first { border-color: var(--gold); background: linear-gradient(135deg,#FFFDE7,#fff); }
@@ -128,27 +117,36 @@
   .podium-rounds { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--saffron); font-weight: 700; }
   .podium-sub { font-size: 0.7rem; color: var(--muted); }
 
-  /* TAB BAR */
   .tab-bar { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
   .tab { padding: 6px 16px; border-radius: 99px; font-size: 0.8rem; font-weight: 700; cursor: pointer; border: 1.5px solid var(--border); background: var(--card-bg); color: var(--muted); transition: all 0.15s; }
   .tab.active, .tab:hover { background: var(--saffron); color: #fff; border-color: var(--saffron); }
 
-  /* LEGEND */
   .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
   .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--muted); font-weight: 600; }
   .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
 
-  /* SETUP GUIDE */
-  .empty-state { text-align: center; padding: 40px 24px; color: var(--muted); }
-  .empty-state .icon { font-size: 3rem; margin-bottom: 12px; }
-  .empty-state h3 { font-family: 'Cinzel', serif; color: var(--deep-gold); margin-bottom: 8px; }
-  .setup-guide { background: var(--card-bg); border-radius: 14px; padding: 24px; box-shadow: var(--shadow); border: 1px solid var(--border); max-width: 640px; margin: 0 auto; text-align: left; }
-  .setup-step { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; }
-  .step-num { background: var(--saffron); color: #fff; font-weight: 700; font-size: 0.8rem; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-  .step-text { font-size: 0.88rem; color: var(--mid); line-height: 1.6; }
-  .step-text strong { color: var(--dark); }
-  code { background: #F3E5C0; border-radius: 4px; padding: 1px 6px; font-size: 0.82em; color: var(--mid); font-family: monospace; }
-  .col-preview { background: #FFF8E8; border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin-top: 8px; font-size: 0.78rem; color: var(--mid); font-family: monospace; line-height: 1.8; }
+  /* FILTER PANEL */
+  .filter-panel { background: var(--card-bg); border-radius: 14px; box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 16px; overflow: hidden; }
+  .filter-header { background: #FFF8E8; padding: 12px 18px; font-weight: 700; font-size: 0.88rem; color: var(--deep-gold); cursor: pointer; user-select: none; display: flex; align-items: center; justify-content: space-between; }
+  .filter-header:hover { background: #FFF0D0; }
+  .filter-body { padding: 14px 18px; display: none; }
+  .filter-body.open { display: block; }
+  .filter-tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+  .filter-tab { padding: 5px 14px; border-radius: 99px; font-size: 0.78rem; font-weight: 700; cursor: pointer; border: 1.5px solid var(--border); background: transparent; color: var(--muted); transition: all 0.15s; }
+  .filter-tab.active { background: var(--saffron); color: #fff; border-color: var(--saffron); }
+  .filter-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+  .filter-field { display: flex; flex-direction: column; gap: 3px; }
+  .filter-field label { font-size: 0.72rem; color: var(--muted); font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; }
+  .filter-field input, .filter-field select { border: 1.5px solid var(--border); border-radius: 8px; padding: 7px 10px; font-size: 0.85rem; color: var(--dark); background: #fff; outline: none; font-family: inherit; min-width: 150px; }
+  .filter-field input:focus, .filter-field select:focus { border-color: var(--saffron); }
+  .btn-sm { padding: 7px 16px; font-size: 0.78rem; }
+
+  /* MAIN PAGE TABLE */
+  .entries-table-wrap { background: var(--card-bg); border-radius: 14px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+  .entries-table-wrap .data-table th { position: sticky; top: 0; }
+  .date-group-label { background: #FFF8E8; padding: 10px 14px; font-weight: 700; font-size: 0.88rem; color: var(--deep-gold); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+  .date-group-label .dg-total { margin-left: auto; font-family: 'Cinzel', serif; color: var(--saffron); font-size: 0.82rem; }
+  .empty-filter { padding: 30px; text-align: center; color: var(--muted); font-size: 0.88rem; }
 
   .divider { height: 1px; background: var(--border); margin: 24px 0; }
   footer { text-align: center; padding: 20px; font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--border); margin-top: 20px; }
@@ -156,7 +154,8 @@
   @media (max-width: 600px) {
     main { padding: 12px; }
     .stat-grid { grid-template-columns: repeat(2, 1fr); }
-    .config-bar input { min-width: 180px; }
+    .data-table { font-size: 0.75rem; }
+    .data-table th, .data-table td { padding: 6px 8px; }
   }
 </style>
 </head>
@@ -178,62 +177,75 @@
 
 <main id="mainContent">
 
-  <!-- SETUP GUIDE -->
-  <div id="setupGuide" class="empty-state">
-    <div class="icon">🪔</div>
-    <h3>Connect Your Google Sheet via Apps Script</h3>
-    <p style="margin-bottom:20px;font-size:0.88rem;">Admin enters data in Google Sheets → GAS serves as backend → Dashboard updates live.</p>
-    <div class="setup-guide">
-      <div class="setup-step">
-        <div class="step-num">1</div>
-        <div class="step-text">
-          <strong>Set up your Google Sheet with these column headers in Row 1 (order flexible):</strong>
-          <div class="col-preview">
-            Date &nbsp;|&nbsp; Devotees &nbsp;|&nbsp; Chanting &nbsp;|&nbsp; Narasimha Kavach &nbsp;|&nbsp; Tulasi Parikrama &nbsp;|&nbsp; Tulasi offered
+  <!-- PAGE TABS -->
+  <div class="page-tabs">
+    <button class="page-tab active" onclick="switchPage('main', this)">📋 Main &nbsp;<span style="font-weight:400;opacity:0.7">Individual Entries</span></button>
+    <button class="page-tab" onclick="switchPage('summary', this)">📊 Summary &nbsp;<span style="font-weight:400;opacity:0.7">Totals &amp; Charts</span></button>
+  </div>
+
+  <!-- ============ PAGE 1: MAIN ============ -->
+  <div id="pageMain">
+    <div class="section-title">📋 Daily Offering Entries</div>
+    <p style="font-size:0.82rem;color:var(--muted);margin-bottom:14px;">Each row shows a devotee's offering for a given day.</p>
+
+    <!-- FILTER PANEL -->
+    <div class="filter-panel">
+      <div class="filter-header" onclick="toggleFilter()">
+        <span>🔍 Filter Entries</span>
+        <span class="chevron" id="filterChev">▼</span>
+      </div>
+      <div class="filter-body open" id="filterBody">
+        <div class="filter-tabs">
+          <div class="filter-tab active" id="filterTabDate" onclick="switchFilterMode('date',this)">🗓 By Date Range</div>
+          <div class="filter-tab" id="filterTabDevotee" onclick="switchFilterMode('devotee',this)">🙏 By Devotee</div>
+        </div>
+        <div id="filterDateRow" class="filter-row">
+          <div class="filter-field">
+            <label>From Date</label>
+            <input type="date" id="filterFromDate" onchange="applyMainFilter()" />
           </div>
-          Each row = one entry. Numeric columns = counts.
+          <div class="filter-field">
+            <label>To Date</label>
+            <input type="date" id="filterToDate" onchange="applyMainFilter()" />
+          </div>
+        </div>
+        <div id="filterDevoteeRow" class="filter-row" style="display:none">
+          <div class="filter-field">
+            <label>Devotee</label>
+            <select id="filterDevotee" onchange="applyMainFilter()"></select>
+          </div>
         </div>
       </div>
-      <div class="setup-step">
-        <div class="step-num">2</div>
-        <div class="step-text"><strong>Extensions → Apps Script</strong> → Paste the <strong>Code.gs</strong> content → Save → <strong>Deploy → New deployment</strong> → Type: <strong>Web app</strong> → Execute as: <strong>Me</strong> → Access: <strong>Anyone</strong> → Deploy → Copy the URL.</div>
-      </div>
-      <div class="setup-step">
-        <div class="step-num">3</div>
-        <div class="step-text">Paste the web app URL above and click <strong>🔄 Refresh</strong>. Dashboard auto-refreshes every 5 minutes. ✨</div>
-      </div>
+    </div>
+
+    <div class="entries-table-wrap" id="mainEntriesTable">
+      <div style="padding:30px;text-align:center;color:var(--muted);">Loading data…</div>
     </div>
   </div>
 
-  <!-- DASHBOARD -->
-  <div id="dashboard" style="display:none">
+  <!-- ============ PAGE 2: SUMMARY ============ -->
+  <div id="pageSummary" style="display:none">
 
-    <!-- TOTAL STAT CARDS -->
     <div class="section-title">📊 Overall Totals</div>
     <div class="stat-grid" id="statGrid"></div>
 
-    <!-- TOP DEVOTEES PODIUM -->
-    <div class="section-title" id="podiumTitle" style="display:none">🏆 Top Devotees (by Total Rounds)</div>
+    <div class="section-title" id="podiumTitle" style="display:none">🏆 Top Devotees (by Total Offerings)</div>
     <div class="podium" id="podium"></div>
 
-    <!-- ACTIVITY BREAKDOWN CARDS -->
     <div class="section-title">🌸 Activity Totals</div>
     <div class="stat-grid" id="activityCards"></div>
 
-    <!-- DAILY BAR CHART -->
-    <div class="section-title">📅 Day-wise Chanting Rounds</div>
+    <div class="section-title">📅 Day-wise Breakdown</div>
     <div class="bar-chart">
       <div class="legend" id="chartLegend"></div>
       <div class="bar-chart-scroll" id="barChart"></div>
     </div>
 
-    <!-- DEVOTEE PROGRESS -->
     <div class="section-title">🙏 Devotee-wise Progress</div>
     <div id="progressBars"></div>
 
     <div class="divider"></div>
 
-    <!-- COLLAPSIBLE BROWSE -->
     <div class="section-title">📋 Browse All Records</div>
     <div class="tab-bar" id="viewTabs">
       <div class="tab active" onclick="switchView('date',this)">🗓 Date-wise</div>
@@ -249,33 +261,60 @@
 
 <script>
 // ─── CONFIG ────────────────────────────────────────────────
-// GAS response expects objects: { date, devotee, chanting, kavach, parikrama, tulasi }
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbzSZHShyBLvUPFNDroOIe_EY6dupKVDyCr-7R7UHbXVmAwbAnPSfdv5vkvdyQwq-y6DqQ/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbyVB-cg79IVAuTE6MomXqK3TjYVU0l9v_K2SGBQhc-pi1UkiANmpk4iAHXj4DgPEqfv4Q/exec';
 
-const ACTIVITIES = ['Chanting', 'Narasimha Kavach', 'Tulasi Parikrama', 'Tulasi offered'];
-const ACT_KEYS   = { 'Chanting': 'chanting', 'Narasimha Kavach': 'kavach', 'Tulasi Parikrama': 'parikrama', 'Tulasi offered': 'tulasi' };
-const ACT_ICONS  = { 'Chanting': '📿', 'Narasimha Kavach': '🛡', 'Tulasi Parikrama': '🌿', 'Tulasi offered': '🌸' };
-const ACT_COLORS = { 'Chanting': '#E07B1A', 'Narasimha Kavach': '#8B4513', 'Tulasi Parikrama': '#2E7D32', 'Tulasi offered': '#7B1FA2' };
+const ACTIVITIES = ['Chanting', 'Narasimha Kavach', 'Tulasi Parikrama', 'Tulasi offered', 'Dhanvantri Prayer'];
+const ACT_KEYS   = {
+  'Chanting': 'chanting',
+  'Narasimha Kavach': 'kavach',
+  'Tulasi Parikrama': 'parikrama',
+  'Tulasi offered': 'tulasi',
+  'Dhanvantri Prayer': 'dhanvantri'
+};
+const ACT_ICONS  = {
+  'Chanting': '📿',
+  'Narasimha Kavach': '🛡',
+  'Tulasi Parikrama': '🌿',
+  'Tulasi offered': '🌸',
+  'Dhanvantri Prayer': '🕊'
+};
+const ACT_COLORS = {
+  'Chanting': '#E07B1A',
+  'Narasimha Kavach': '#8B4513',
+  'Tulasi Parikrama': '#2E7D32',
+  'Tulasi offered': '#7B1FA2',
+  'Dhanvantri Prayer': '#00695C'
+};
 
 let allData = [];
 let currentView = 'date';
+let currentPage = 'main';
+let mainFilterMode = 'date';
 let refreshTimer = null;
 
-// Auto-load on page load
 setTimeout(loadData, 300);
 
 // ─── LOAD ─────────────────────────────────────────────────
 async function loadData() {
   showStatus('loading', '⏳ Fetching data via Apps Script…');
   try {
-    const res = await fetch(GAS_URL);
+    const res = await fetch(GAS_URL + '?_=' + Date.now());
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
     if (!json.success) throw new Error(json.error || 'API returned error');
     if (!json.data || json.data.length === 0) throw new Error('No data found in sheet.');
-    allData = json.data.map(normalizeRow);
-    if (allData.length === 0) throw new Error('No valid rows after normalization.');
-    renderDashboard();
+    allData = json.data.map(r => ({
+      date:       r.date || '',
+      devotee:    r.devotee || '',
+      chanting:   Number(r.chanting) || 0,
+      kavach:     Number(r.kavach) || 0,
+      parikrama:  Number(r.parikrama) || Number(r.parik) || 0,
+      tulasi:     Number(r.tulasi) || 0,
+      dhanvantri: Number(r.dhanvantri) || 0,
+    }));
+    if (allData.length === 0) throw new Error('No valid rows.');
+    renderMainPage();
+    renderSummaryPage();
     showStatus('success', `✅ Loaded ${allData.length} records.`);
     document.getElementById('lastSync').textContent = 'Synced: ' + new Date().toLocaleTimeString('en-IN');
     clearTimeout(refreshTimer);
@@ -285,79 +324,171 @@ async function loadData() {
   }
 }
 
-function normalizeRow(r) {
-  return {
-    date:     r.date || '',
-    devotee:  r.devotee || '',
-    chanting: Number(r.chanting) || 0,
-    kavach:   Number(r.kavach) || 0,
-    parikrama: Number(r.parikrama) || Number(r.parik) || 0,
-    tulasi:   Number(r.tulasi) || 0,
-  };
+function rowTotal(r) {
+  return r.chanting + r.kavach + r.parikrama + r.tulasi + r.dhanvantri;
 }
 
-function rowTotal(r) { return r.chanting + r.kavach + r.parikrama + r.tulasi; }
+// ─── PAGE SWITCHING ──────────────────────────────────────
+function switchPage(page, el) {
+  currentPage = page;
+  document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('pageMain').style.display = page === 'main' ? 'block' : 'none';
+  document.getElementById('pageSummary').style.display = page === 'summary' ? 'block' : 'none';
+}
 
-// ─── RENDER ───────────────────────────────────────────────
-function renderDashboard() {
-  document.getElementById('setupGuide').style.display = 'none';
-  document.getElementById('dashboard').style.display = 'block';
+// ═══════════════════════════════════════════════════════════
+// PAGE 1: MAIN — Individual Entries with Filters
+// ═══════════════════════════════════════════════════════════
+function renderMainPage() {
+  // Populate dropdown with unique devotees (auto-updates on refresh)
+  const devotees = [...new Set(allData.map(r => r.devotee))].sort();
+  const dd = document.getElementById('filterDevotee');
+  if (dd) {
+    dd.innerHTML = '<option value="">-- All Devotees --</option>' + devotees.map(d => `<option value="${d}">${d}</option>`).join('');
+  }
 
+  // Set min/max on date inputs
+  const dates = [...new Set(allData.map(r => r.date))].sort();
+  if (dates.length) {
+    const from = document.getElementById('filterFromDate');
+    const to = document.getElementById('filterToDate');
+    if (!from.value) from.value = dates[0];
+    if (!to.value) to.value = dates[dates.length - 1];
+    from.min = dates[0]; from.max = dates[dates.length - 1];
+    to.min = dates[0]; to.max = dates[dates.length - 1];
+  }
+
+  applyMainFilter();
+}
+
+function applyMainFilter() {
+  const container = document.getElementById('mainEntriesTable');
+  let filtered = allData;
+
+  if (mainFilterMode === 'date') {
+    const from = document.getElementById('filterFromDate').value;
+    const to = document.getElementById('filterToDate').value;
+    if (from) filtered = filtered.filter(r => r.date >= from);
+    if (to) filtered = filtered.filter(r => r.date <= to);
+  } else {
+    const dev = document.getElementById('filterDevotee').value;
+    if (dev) filtered = filtered.filter(r => r.devotee === dev);
+  }
+
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="empty-filter">🔍 No entries match the selected filter.</div>';
+    return;
+  }
+
+  const byDate = groupBy(filtered, 'date');
+  const dateKeys = Object.keys(byDate).sort().reverse();
+
+  container.innerHTML = dateKeys.map(date => {
+    const rows = byDate[date].sort((a,b) => a.devotee.localeCompare(b.devotee));
+    const dayTotal = rows.reduce((s,r) => s + rowTotal(r), 0);
+    return `<div class="date-group-label">🗓 ${formatDate(date)} <span class="dg-total">${fmt(dayTotal)} total</span></div>
+      <table class="data-table">
+        <thead><tr>
+          <th>Devotee</th>
+          <th>📿 Rounds</th>
+          <th>🛡 Kavacham</th>
+          <th>🌿 Parikrama</th>
+          <th>🌸 Offered</th>
+          <th>🕊 Dhanvantri</th>
+          <th>Total</th>
+        </tr></thead>
+        <tbody>${rows.map(r => `<tr>
+          <td><strong>${r.devotee}</strong></td>
+          <td>${pill(r.chanting)}</td>
+          <td>${pill(r.kavach)}</td>
+          <td>${pill(r.parikrama)}</td>
+          <td>${pill(r.tulasi)}</td>
+          <td>${pill(r.dhanvantri)}</td>
+          <td><strong style="color:var(--saffron)">${fmt(rowTotal(r))}</strong></td>
+        </tr>`).join('')}</tbody>
+      </table>`;
+  }).join('<div style="height:2px;background:var(--border);"></div>');
+}
+
+function switchFilterMode(mode, el) {
+  mainFilterMode = mode;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('filterDateRow').style.display = mode === 'date' ? 'flex' : 'none';
+  document.getElementById('filterDevoteeRow').style.display = mode === 'devotee' ? 'flex' : 'none';
+  applyMainFilter();
+}
+
+function toggleFilter() {
+  const body = document.getElementById('filterBody');
+  const chev = document.getElementById('filterChev');
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+}
+
+// ═══════════════════════════════════════════════════════════
+// PAGE 2: SUMMARY — Aggregated Views
+// ═══════════════════════════════════════════════════════════
+function renderSummaryPage() {
   const totals = allData.reduce((s,r) => ({
     chanting:  s.chanting  + r.chanting,
     kavach:    s.kavach    + r.kavach,
     parikrama: s.parikrama + r.parikrama,
     tulasi:    s.tulasi    + r.tulasi,
-  }), { chanting:0, kavach:0, parikrama:0, tulasi:0 });
-  const grandTotal = totals.chanting + totals.kavach + totals.parikrama + totals.tulasi;
+    dhanvantri:s.dhanvantri+ r.dhanvantri,
+  }), { chanting:0, kavach:0, parikrama:0, tulasi:0, dhanvantri:0 });
+  const grandTotal = totals.chanting + totals.kavach + totals.parikrama + totals.tulasi + totals.dhanvantri;
   const uniqueDates   = new Set(allData.map(r=>r.date)).size;
   const uniqueDevotees = new Set(allData.map(r=>r.devotee)).size;
 
+  // Stat cards
   document.getElementById('statGrid').innerHTML = [
     { icon:'📿', val: fmt(grandTotal),    label: 'Grand Total' },
     { icon:'🙏', val: uniqueDevotees,     label: 'Devotees' },
     { icon:'🗓', val: uniqueDates,         label: 'Days Active' },
     { icon:'📋', val: allData.length,     label: 'Entries' },
-  ].map(s=>`<div class="stat-card"><div class="stat-icon">${s.icon}</div><div class="stat-value">${fmt(s.val)}</div><div class="stat-label">${s.label}</div></div>`).join('');
+  ].map(s => `<div class="stat-card"><div class="stat-icon">${s.icon}</div><div class="stat-value">${fmt(s.val)}</div><div class="stat-label">${s.label}</div></div>`).join('');
 
-  const activityLabels = [
-    { key:'chanting',  label:'Chanting' },
-    { key:'kavach',    label:'Narasimha Kavach' },
-    { key:'parikrama', label:'Tulasi Parikrama' },
-    { key:'tulasi',    label:'Tulasi offered' },
-  ];
-  document.getElementById('activityCards').innerHTML = activityLabels.map(a => {
-    const color = ACT_COLORS[a.label] || 'var(--saffron)';
-    return `<div class="stat-card" style="--accent:${color}">
-      <div class="stat-icon">${ACT_ICONS[a.label]}</div>
-      <div class="stat-value" style="color:${color}">${fmt(totals[a.key])}</div>
+  // Activity cards
+  const activityMeta = ACTIVITIES.map(act => ({
+    label: act,
+    key:   ACT_KEYS[act],
+    total: totals[ACT_KEYS[act]],
+    icon:  ACT_ICONS[act],
+    color: ACT_COLORS[act],
+  }));
+  document.getElementById('activityCards').innerHTML = activityMeta.map(a =>
+    `<div class="stat-card" style="--accent:${a.color}">
+      <div class="stat-icon">${a.icon}</div>
+      <div class="stat-value" style="color:${a.color}">${fmt(a.total)}</div>
       <div class="stat-label">${a.label}</div>
-    </div>`;
-  }).join('');
+    </div>`
+  ).join('');
 
   // Podium
   const byDevotee = groupBy(allData, 'devotee');
   const devSorted = Object.entries(byDevotee)
-    .map(([name, rows]) => ({ name, total: rows.reduce((s,r)=>s+rowTotal(r),0) }))
-    .sort((a,b)=>b.total - a.total);
-
+    .map(([name, rows]) => ({ name, total: rows.reduce((s,r) => s + rowTotal(r), 0) }))
+    .sort((a,b) => b.total - a.total);
   const medals = ['🥇','🥈','🥉'];
   const podiumTitle = document.getElementById('podiumTitle');
   if (devSorted.length >= 1) {
     podiumTitle.style.display = 'flex';
-    document.getElementById('podium').innerHTML = devSorted.slice(0,3).map((d,i) => `
-      <div class="podium-card ${i===0?'first':''}">
+    document.getElementById('podium').innerHTML = devSorted.slice(0,3).map((d,i) =>
+      `<div class="podium-card ${i===0?'first':''}">
         <div class="podium-rank">${medals[i]}</div>
         <div class="podium-name">${d.name}</div>
         <div class="podium-rounds">${fmt(d.total)}</div>
         <div class="podium-sub">total offerings</div>
-      </div>`).join('');
+      </div>`
+    ).join('');
   }
 
   // Progress bars
   const maxTotal = devSorted[0]?.total || 1;
-  document.getElementById('progressBars').innerHTML = devSorted.map(d => `
-    <div class="progress-card">
+  document.getElementById('progressBars').innerHTML = devSorted.map(d =>
+    `<div class="progress-card">
       <div class="progress-header">
         <span class="progress-name">🙏 ${d.name}</span>
         <span style="font-family:'Cinzel',serif;color:var(--saffron);font-weight:700">${fmt(d.total)}</span>
@@ -365,38 +496,29 @@ function renderDashboard() {
       <div class="progress-bar-wrap" style="margin-top:4px">
         <div class="progress-bar-fill" style="width:${Math.round(d.total/maxTotal*100)}%"></div>
       </div>
-    </div>`).join('');
+    </div>`
+  ).join('');
 
-  // Stacked bar chart by date
+  // Stacked bar chart
   const byDate = groupBy(allData, 'date');
   const dateSorted = Object.keys(byDate).sort();
   const dayTotals = dateSorted.map(d => {
     const rows = byDate[d];
-    return {
-      date: d,
-      chanting:  rows.reduce((s,r)=>s+r.chanting,0),
-      kavach:    rows.reduce((s,r)=>s+r.kavach,0),
-      parikrama: rows.reduce((s,r)=>s+r.parikrama,0),
-      tulasi:    rows.reduce((s,r)=>s+r.tulasi,0),
-      total:     rows.reduce((s,r)=>s+rowTotal(r),0),
-    };
+    const t = { date: d, total: 0 };
+    ACTIVITIES.forEach(act => { t[ACT_KEYS[act]] = rows.reduce((s,r) => s + r[ACT_KEYS[act]], 0); });
+    t.total = ACTIVITIES.reduce((s,act) => s + t[ACT_KEYS[act]], 0);
+    return t;
   });
-  const maxDay = Math.max(...dayTotals.map(d=>d.total), 1);
+  const maxDay = Math.max(...dayTotals.map(d => d.total), 1);
   const chartH = 110;
 
-  document.getElementById('chartLegend').innerHTML = activityLabels.map(a => `
-    <div class="legend-item">
-      <div class="legend-dot" style="background:${ACT_COLORS[a.label]}"></div>${a.label}
-    </div>`).join('');
+  document.getElementById('chartLegend').innerHTML = activityMeta.map(a =>
+    `<div class="legend-item"><div class="legend-dot" style="background:${a.color}"></div>${a.label}</div>`
+  ).join('');
 
   document.getElementById('barChart').innerHTML = dayTotals.map(d => {
-    const h = Math.max(8, Math.round(d.total/maxDay*chartH));
-    const segs = [
-      { val:d.chanting,  color:ACT_COLORS['Chanting'] },
-      { val:d.kavach,    color:ACT_COLORS['Narasimha Kavach'] },
-      { val:d.parikrama, color:ACT_COLORS['Tulasi Parikrama'] },
-      { val:d.tulasi,    color:ACT_COLORS['Tulasi offered'] },
-    ].filter(s=>s.val>0);
+    const h = Math.max(8, Math.round(d.total / maxDay * chartH));
+    const segs = activityMeta.map(a => ({ val: d[ACT_KEYS[a.label]], color: a.color })).filter(s => s.val > 0);
     const segHtml = segs.map(s =>
       `<div class="stacked-seg" style="height:${Math.round(s.val/d.total*h)}px;background:${s.color}"></div>`
     ).join('');
@@ -423,14 +545,14 @@ function renderCollapsible(view) {
     const byDate = groupBy(allData, 'date');
     groups = Object.keys(byDate).sort().reverse().map(date => {
       const rows = byDate[date];
-      const tot = rows.reduce((s,r)=>s+rowTotal(r),0);
+      const tot = rows.reduce((s,r) => s + rowTotal(r), 0);
       return {
         label: `🗓 ${formatDate(date)}`,
         badge: `${fmt(tot)} total`,
-        tableHeaders: ['Devotee','Chanting','Narasimha Kavach','Tulasi Parikrama','Tulasi offered','Total'],
+        tableHeaders: ['Devotee','Rounds','Kavach','Parikrama','Offered','Dhanvantri','Total'],
         tableRows: rows.map(r => [
           r.devotee,
-          pill(r.chanting), pill(r.kavach), pill(r.parikrama), pill(r.tulasi),
+          pill(r.chanting), pill(r.kavach), pill(r.parikrama), pill(r.tulasi), pill(r.dhanvantri),
           `<strong style="color:var(--saffron)">${fmt(rowTotal(r))}</strong>`
         ])
       };
@@ -438,47 +560,38 @@ function renderCollapsible(view) {
   } else if (view === 'devotee') {
     const byDev = groupBy(allData, 'devotee');
     groups = Object.entries(byDev)
-      .sort((a,b) => b[1].reduce((s,r)=>s+rowTotal(r),0) - a[1].reduce((s,r)=>s+rowTotal(r),0))
+      .sort((a,b) => b[1].reduce((s,r) => s + rowTotal(r), 0) - a[1].reduce((s,r) => s + rowTotal(r), 0))
       .map(([name, rows]) => {
-        const tot = rows.reduce((s,r)=>s+rowTotal(r),0);
-        const ch = rows.reduce((s,r)=>s+r.chanting,0);
-        const ka = rows.reduce((s,r)=>s+r.kavach,0);
-        const pa = rows.reduce((s,r)=>s+r.parikrama,0);
-        const tu = rows.reduce((s,r)=>s+r.tulasi,0);
+        const st = { chanting:0, kavach:0, parikrama:0, tulasi:0, dhanvantri:0, total:0 };
+        rows.forEach(r => { st.chanting += r.chanting; st.kavach += r.kavach; st.parikrama += r.parikrama; st.tulasi += r.tulasi; st.dhanvantri += r.dhanvantri; });
+        st.total = st.chanting + st.kavach + st.parikrama + st.tulasi + st.dhanvantri;
         return {
           label: `🙏 ${name}`,
-          badge: `${fmt(tot)} total`,
-          tableHeaders: ['Date','Chanting','Narasimha Kavach','Tulasi Parikrama','Tulasi offered','Total'],
+          badge: `${fmt(st.total)} total`,
+          tableHeaders: ['Date','Rounds','Kavach','Parikrama','Offered','Dhanvantri','Total'],
           tableRows: [
             ...rows.sort((a,b) => a.date.localeCompare(b.date)).map(r => [
               formatDate(r.date),
-              pill(r.chanting), pill(r.kavach), pill(r.parikrama), pill(r.tulasi),
+              pill(r.chanting), pill(r.kavach), pill(r.parikrama), pill(r.tulasi), pill(r.dhanvantri),
               `<strong style="color:var(--saffron)">${fmt(rowTotal(r))}</strong>`
             ]),
-            [`<strong>Subtotal</strong>`, pill(ch), pill(ka), pill(pa), pill(tu),
-             `<strong style="color:var(--saffron)">${fmt(tot)}</strong>`]
+            [`<strong>Subtotal</strong>`, pill(st.chanting), pill(st.kavach), pill(st.parikrama), pill(st.tulasi), pill(st.dhanvantri),
+             `<strong style="color:var(--saffron)">${fmt(st.total)}</strong>`]
           ]
         };
       });
   } else {
-    // Activity-wise
     ACTIVITIES.forEach(act => {
       const key = ACT_KEYS[act];
-      // Filter rows with this activity > 0, map to { devotee, date, value }
-      const actRows = allData
-        .filter(r => r[key] > 0)
-        .map(r => ({ devotee: r.devotee, date: r.date, value: r[key] }));
+      const actRows = allData.filter(r => r[key] > 0).map(r => ({ devotee: r.devotee, date: r.date, value: r[key] }));
       if (actRows.length === 0) return;
-
       const total = actRows.reduce((s,r) => s + r.value, 0);
       const uniqueD = new Set(actRows.map(r => r.devotee)).size;
       groups.push({
         label: `${ACT_ICONS[act]} ${act}`,
         badge: `${fmt(total)} total · ${uniqueD} devotees`,
         tableHeaders: ['Devotee','Date','Count'],
-        tableRows: actRows
-          .sort((a,b) => b.value - a.value)
-          .map(r => [r.devotee, formatDate(r.date), pill(r.value)])
+        tableRows: actRows.sort((a,b) => b.value - a.value).map(r => [r.devotee, formatDate(r.date), pill(r.value)])
       });
     });
   }
@@ -494,8 +607,8 @@ function renderCollapsible(view) {
       </div>
       <div class="collapsible-body" id="body_${id}">
         <table class="data-table">
-          <thead><tr>${g.tableHeaders.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
-          <tbody>${g.tableRows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+          <thead><tr>${g.tableHeaders.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+          <tbody>${g.tableRows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
         </table>
       </div>`;
     area.appendChild(div);
@@ -508,31 +621,38 @@ function pill(n) {
 }
 
 function toggleCol(id) {
-  document.getElementById('body_'+id).classList.toggle('open');
-  document.getElementById('hdr_'+id).classList.toggle('open');
-  document.getElementById('chev_'+id).classList.toggle('open');
+  document.getElementById('body_' + id).classList.toggle('open');
+  document.getElementById('hdr_' + id).classList.toggle('open');
+  document.getElementById('chev_' + id).classList.toggle('open');
 }
 
 function switchView(v, el) {
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   renderCollapsible(v);
 }
 
 // ─── HELPERS ─────────────────────────────────────────────
 function groupBy(arr, key) {
-  return arr.reduce((acc, item) => { const k=item[key]||'Unknown'; (acc[k]=acc[k]||[]).push(item); return acc; }, {});
+  return arr.reduce((acc, item) => { const k = item[key] || 'Unknown'; (acc[k] = acc[k] || []).push(item); return acc; }, {});
 }
 function fmt(n) { return Number(n).toLocaleString('en-IN'); }
-function formatDate(d) { const p=new Date(d+'T00:00:00'); return isNaN(p)?d:p.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'}); }
-function shortDate(d) { const p=new Date(d+'T00:00:00'); return isNaN(p)?d:p.toLocaleDateString('en-IN',{day:'numeric',month:'short'}); }
-function showStatus(type, msg) {
-  const el=document.getElementById('statusBar'); el.className=type; el.textContent=msg;
-  if(type==='success') setTimeout(()=>el.style.display='none',4000);
+function parseDateSafe(s) {
+  if (!s) return null;
+  // YYYY-MM-DD — parse parts directly, no string-to-Date ambiguity
+  var m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (m) return new Date(+m[1], +m[2] - 1, +m[3]);
+  // DD/MM/YYYY
+  var m2 = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (m2) return new Date(+m2[3], +m2[2] - 1, +m2[1]);
+  var p = new Date(s);
+  return isNaN(p) ? null : p;
 }
-function showSetup() {
-  document.getElementById('setupGuide').style.display='block';
-  document.getElementById('dashboard').style.display='none';
+function formatDate(d) { var p = parseDateSafe(d); return p ? p.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) : d; }
+function shortDate(d) { var p = parseDateSafe(d); return p ? p.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : d; }
+function showStatus(type, msg) {
+  const el = document.getElementById('statusBar'); el.className = type; el.textContent = msg;
+  if (type === 'success') setTimeout(() => el.style.display = 'none', 4000);
 }
 </script>
 </body>
