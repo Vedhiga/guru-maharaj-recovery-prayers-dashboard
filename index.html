@@ -154,8 +154,12 @@
   @media (max-width: 600px) {
     main { padding: 12px; }
     .stat-grid { grid-template-columns: repeat(2, 1fr); }
-    .data-table { font-size: 0.75rem; }
-    .data-table th, .data-table td { padding: 6px 8px; }
+    .data-table { font-size: 0.7rem; }
+    .data-table th, .data-table td { padding: 5px 6px; white-space: nowrap; }
+    .entries-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .collapsible-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .date-group-label { font-size: 0.78rem; padding: 8px 10px; }
+    .filter-field input, .filter-field select { min-width: 120px; font-size: 0.78rem; }
   }
 </style>
 </head>
