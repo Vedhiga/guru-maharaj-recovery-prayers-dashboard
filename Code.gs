@@ -10,7 +10,7 @@
  */
 
 // ─── CONFIG ────────────────────────────────────────────────
-const SHEET_NAME = 'Sheet1';           // tab name
+const SHEET_NAME = 'Sheet2';           // tab name
 const HEADER_ROW = 1;                  // row containing column names
 const REQUIRED   = ['date', 'devotees'];
 // ───────────────────────────────────────────────────────────
